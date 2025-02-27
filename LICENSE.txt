@@ -1,0 +1,9 @@
+EMULATOR LIVE PREVIEW LICENSE
+
+Copyright (c) 2023 Kologo Josias
+
+This software and any associated documentation (the "Software") are the exclusive property of Kologo Josias. The Software is provided solely for internal use and evaluation. All rights are reserved.
+
+Unauthorized copying, modification, distribution, transmission, or use of the Software, in whole or in part, is strictly prohibited without the prior written consent of Kologo Josias. No license, express or implied, is granted by this License or otherwise under any patent, trademark, copyright, or other intellectual property right of Kologo Josias.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL Kologo Josias BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
