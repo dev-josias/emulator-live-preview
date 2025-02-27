@@ -1,81 +1,164 @@
 {
   "name": "emulator-live-preview",
-  "publisher": "Kologo Josias",
   "displayName": "Emulator Live Preview",
-  "description": "Launch and display Android/iOS emulators in a VS Code side tab with live preview.",
-  "version": "0.0.1",
+  "description": "Enables seamless integration with Android/iOS emulators directly within the VS Code workspace with real-time interaction and screen streaming.",
+  "publisher": "mimshak",
+  "license": "MIT",
+  "author": {
+    "name": "Kologo Josias",
+    "email": "hello@kologojosias.com",
+    "url": "https://kologojosias.com"
+  },
+  "version": "0.0.7",
+  "icon": "media/logo.png",
   "engines": {
-    "vscode": "^1.97.0"
+    "vscode": "^1.60.0"
   },
   "categories": [
+    "Debuggers",
     "Other"
   ],
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
-    "viewsContainers": {
-      "activitybar": [
+    "views": {
+      "emulator-live-preview": [
         {
-          "id": "emulatorContainer",
-          "title": "Emulator",
-          "icon": "resources/icon.svg"
+          "id": "emulators-android",
+          "name": "Android Emulators",
+          "contextualTitle": "Android Emulator",
+          "icon": "media/icon.svg",
+          "visibility": "visible"
         }
       ]
     },
-    "views": {
-      "emulatorContainer": [
+    "viewsContainers": {
+      "activitybar": [
         {
-          "id": "emulatorView",
-          "name": "Device Preview",
-          "type": "webview"
+          "id": "emulator-live-preview",
+          "title": "Emulators Live Preview",
+          "icon": "media/icon.svg"
         }
       ]
     },
     "commands": [
       {
-        "command": "extension.startAndroidEmulator",
-        "title": "Mobile Emulator: Start Android Emulator"
+        "command": "emulator-live-preview.start",
+        "title": "Start Emulator",
+        "icon": "$(debug-start)"
       },
       {
-        "command": "extension.startIOSEmulator",
-        "title": "Mobile Emulator: Start iOS Simulator"
+        "command": "emulator-live-preview.stop",
+        "title": "Stop Emulator",
+        "icon": "$(debug-stop)"
       },
       {
-        "command": "extension.connectToPhysicalDevice",
-        "title": "Mobile Emulator: Connect to Physical Device"
+        "command": "emulator-live-preview.refresh-android",
+        "title": "Refresh Android Emulators",
+        "icon": "$(refresh)"
       },
       {
-        "command": "extension.refreshEmulatorView",
-        "title": "Mobile Emulator: Refresh View"
+        "command": "emulator-live-preview.refresh-ios",
+        "title": "Refresh iOS Simulators",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "emulator-live-preview.new-android-emulator",
+        "title": "Create New Android Emulator",
+        "icon": "$(add)"
       }
-    ]
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "emulator-live-preview.start",
+          "when": "viewItem == emulatorStopped && view == emulators-android",
+          "group": "inline"
+        },
+        {
+          "command": "emulator-live-preview.stop",
+          "when": "viewItem == emulatorRunning && view == emulators-android",
+          "group": "inline"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "emulator-live-preview.refresh-android",
+          "when": "view == emulators-android",
+          "group": "navigation"
+        },
+        {
+          "command": "emulator-live-preview.refresh-ios",
+          "when": "view == emulators-ios",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Emulator Live Preview",
+      "properties": {
+        "emulator-live-preview.androidSdkPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to Android SDK (auto-detected if not set)"
+        },
+        "emulator-live-preview.iosSimulatorPath": {
+          "type": "string",
+          "default": "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app",
+          "description": "Path to iOS Simulator.app"
+        },
+        "emulator-live-preview.streamQuality": {
+          "type": "number",
+          "default": 80,
+          "description": "Stream quality percentage (80-100 recommended)"
+        },
+        "emulator-live-preview.adbPath": {
+          "type": "string",
+          "default": "",
+          "description": "Custom path to ADB executable"
+        }
+      }
+    }
   },
   "scripts": {
-    "vscode:prepublish": "yarn run package",
-    "compile": "yarn run check-types && yarn run lint && node esbuild.js",
-    "watch": "npm-run-all -p watch:*",
-    "watch:esbuild": "node esbuild.js --watch",
-    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
-    "package": "yarn run check-types && yarn run lint && node esbuild.js --production",
-    "compile-tests": "tsc -p . --outDir out",
-    "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
-    "check-types": "tsc --noEmit",
-    "lint": "eslint src",
-    "test": "vscode-test"
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch:tsc": "tsc -watch -p ./",
+    "watch:esbuild": "yarn esbuild src/index.ts --bundle --outfile=dist/extension.js --watch",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext .ts",
+    "test": "vscode-test --extensionDevelopmentPath=.",
+    "postinstall": "npm run compile-proto",
+    "compile-proto": "protoc --js_out=import_style=commonjs,binary:. --grpc_out=. --plugin=protoc-gen-grpc=./node_modules/.bin/grpc_tools_node_protoc_plugin proto/*.proto"
   },
   "devDependencies": {
-    "@types/vscode": "^1.97.0",
     "@types/mocha": "^10.0.10",
-    "@types/node": "20.x",
-    "@typescript-eslint/eslint-plugin": "^8.22.0",
-    "@typescript-eslint/parser": "^8.22.0",
-    "eslint": "^9.19.0",
-    "esbuild": "^0.24.2",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^5.7.3",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+    "@types/node": "22.13.5",
+    "@types/vscode": "^1.60.0",
+    "@types/ws": "^8.5.13",
+    "@types/xml2js": "^0.4.14",
+    "@typescript-eslint/eslint-plugin": "^8.10.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "@vscode/test-electron": "^2.4.1",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.13.0",
+    "grpc-tools": "^1.13.0",
+    "protoc-gen-js": "3.21.3",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.12.5",
+    "@grpc/proto-loader": "^0.7.13",
+    "adbkit": "^2.11.1",
+    "frida": "^16.1.11",
+    "node-simctl": "7.7.1",
+    "ws": "^8.18.1",
+    "xml2js": "^0.6.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mimshak/emulator-live-preview"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
