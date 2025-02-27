@@ -3,7 +3,7 @@
   "displayName": "Emulator Live Preview",
   "description": "Enables seamless integration with Android/iOS emulators directly within the VS Code workspace with real-time interaction and screen streaming.",
   "publisher": "yoshimyra",
-  "license": "ISC",
+  "license": "All Rights Reserved",
   "author": {
     "name": "Kologo Josias",
     "email": "hello@kologojosias.com",
