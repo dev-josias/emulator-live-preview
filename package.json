@@ -9,7 +9,7 @@
     "email": "hello@kologojosias.com",
     "url": "https://kologojosias.com"
   },
-  "version": "0.0.7",
+  "version": "0.0.1",
   "icon": "media/logo.png",
   "engines": {
     "vscode": "^1.60.0"

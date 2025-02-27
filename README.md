@@ -1,71 +1,93 @@
-# emulator-live-preview README
+# Emulator Live Preview
 
-This is the README for your extension "emulator-live-preview". After writing up a brief description, we recommend including the following sections.
+**Emulator Live Preview** is a Visual Studio Code extension that seamlessly docks Android and iOS emulators directly within your VS Code workspace. Enjoy real‑time screen streaming and interactive controls so you can develop, test, and debug your mobile applications without ever leaving the editor. Future updates will also support mirroring of physical devices.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Real-Time Streaming:**  
+  Live, low-latency streaming of your Android emulator or iOS simulator directly into an editor tab. Watch your app’s changes in real time as you code.
 
-For example if there is an image subfolder under your extension project workspace:
+- **Interactive Controls:**  
+  Use intuitive floating controls to perform common actions such as:
 
-\!\[feature X\]\(images/feature-x.png\)
+  - **Rotate:** Change device orientation.
+  - **Volume Up/Down:** Adjust the device volume.
+  - **Power:** Simulate power button presses.
+  - And more — all designed to mimic physical device interactions.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- **Device Management:**  
+  Automatically detect running emulators (and eventually physical devices) and display them in a dedicated tree view. Easily start and stop devices with a single click.
+
+- **Multi-Platform Support:**
+  - **Android:** Full support on all platforms with auto‑detection of ADB and scrcpy for physical device mirroring.
+  - **iOS:** Simulator support is available on macOS (requires Xcode).
+  - **Manual Configuration:** Override auto‑detected paths via settings if needed.
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- **Android:**
+
+  - Android SDK with ADB installed (or configured via settings).
+  - For physical device mirroring, ensure USB debugging is enabled on your device.
+
+- **iOS:**
+
+  - macOS with Xcode installed (only the iOS Simulator is supported for now).
+
+- **General:**
+  - Visual Studio Code (version 1.60.0 or later)
+  - Node.js (for development)
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- **`emulator-live-preview.androidSdkPath`**  
+  _Type:_ `string`  
+  _Default:_ `""`  
+  _Description:_ Path to your Android SDK. Auto-detected if not set.
+
+- **`emulator-live-preview.iosSimulatorPath`**  
+  _Type:_ `string`  
+  _Default:_ `/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app`  
+  _Description:_ Path to the iOS Simulator application.
+
+- **`emulator-live-preview.adbPath`**  
+  _Type:_ `string`  
+  _Default:_ `""`  
+  _Description:_ Custom path to the ADB executable. If empty, the extension will auto-detect it.
+
+- **`emulator-live-preview.streamQuality`**  
+  _Type:_ `number`  
+  _Default:_ `80`  
+  _Description:_ Streaming quality percentage (80–100 recommended).
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- **iOS Streaming Limitations:**  
+  Due to Apple’s restrictions, iOS Simulator streaming is achieved via periodic screenshots (which may have a lower frame rate). Physical iOS device mirroring is not yet supported.
+
+- **gRPC Streaming:**  
+  The gRPC-based streaming for Android emulators is experimental. In some environments, you may need to adjust emulator flags or update SDK tools.
+
+- **Performance:**  
+  Running multiple high-resolution streams simultaneously may increase CPU usage. We recommend testing with a single stream if performance issues occur.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
+- Initial release of Emulator Live Preview.
+- Real-time streaming and interactive controls for Android emulators and iOS simulators.
+- Auto-detection and manual configuration of Android SDK/ADB paths.
+- Integrated device management tree view.
+- Basic support for physical Android device mirroring (via scrcpy, coming in future updates).
 
-Initial release of ...
+## Additional Information
 
-### 1.0.1
+For more details and troubleshooting, please refer to:
 
-Fixed issue #.
+- [VS Code Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+- [Issues and Feature Requests](https://github.com/mimshak/emulator-live-preview/issues)
 
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+**Enjoy a seamless mobile development experience directly from your editor!**
