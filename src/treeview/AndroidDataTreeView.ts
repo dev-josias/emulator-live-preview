@@ -366,27 +366,30 @@ export class AndroidTreeDataProvider
   }
 
   private openWebview(avdName: string): void {
-    const panel = vscode.window.createWebviewPanel(
-      "android-emulator",
-      `Emulator: ${avdName}`,
-      vscode.ViewColumn.Beside,
-      {
-        enableScripts: true,
-      }
-    );
-    panel.webview.html = this.getWebviewContent();
-    this.webviewPanels.set(avdName, panel);
-    panel.webview.onDidReceiveMessage((message: any) => {
-      if (message.command === "sendInput") {
-        // Handle input from Webview if needed
-        console.log("Received input from webview:", message);
-      }
-    });
-    panel.onDidDispose(() => {
-      console.log("Webview panel disposed");
-      if (!this.stoppedFromTreeViewItem) {
-        this.stopEmulator(avdName);
-      }
+    vscode.commands.executeCommand("workbench.action.splitEditor").then(() => {
+      const panel = vscode.window.createWebviewPanel(
+        "android-emulator",
+        `Emulator: ${avdName}`,
+        vscode.ViewColumn.Beside,
+        {
+          enableScripts: true,
+          retainContextWhenHidden: true,
+        }
+      );
+      panel.webview.html = this.getWebviewContent();
+      this.webviewPanels.set(avdName, panel);
+      panel.webview.onDidReceiveMessage((message: any) => {
+        if (message.command === "sendInput") {
+          // Handle input from Webview if needed
+          console.log("Received input from webview:", message);
+        }
+      });
+      panel.onDidDispose(() => {
+        console.log("Webview panel disposed");
+        if (!this.stoppedFromTreeViewItem) {
+          this.stopEmulator(avdName);
+        }
+      });
     });
   }
 
@@ -431,10 +434,9 @@ export class AndroidTreeDataProvider
 					</div>
 
 					<div class="bg-black rounded-xl overflow-hidden shadow-xl shadow-stone-950/50">
-						<canvas id="emulatorCanvas" width="360" height="800"></canvas>
+						<canvas id="emulatorCanvas" width="300" height="600"></canvas>
 					</div>
           
-          <!-- Connection Status -->
           <div id="connectionStatus" class="text-xs text-gray-500">Waiting for connection...</div>
 				</div>
 				

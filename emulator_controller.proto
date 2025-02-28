@@ -30,19 +30,6 @@ option objc_class_prefix = "AEC";
 package android.emulation.control;
 import "google/protobuf/empty.proto";
 
-// An EmulatorController service lets you control the emulator.
-// Note that this is currently an experimental feature, and that the
-// service definition might change without notice. Use at your own risk!
-//
-// We use the following rough conventions:
-//
-// streamXXX --> streams values XXX (usually for emulator lifetime). Values
-//               are updated as soon as they become available.
-// getXXX    --> gets a single value XXX
-// setXXX    --> sets a single value XXX, does not returning state, these
-//               usually have an observable lasting side effect.
-// sendXXX   --> send a single event XXX, possibly returning state information.
-//               android usually responds to these events.
 service EmulatorController {
     // set/get/stream the sensor data
     rpc streamSensor(SensorValue) returns (stream SensorValue) {}
