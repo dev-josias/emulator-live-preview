@@ -10,7 +10,7 @@
     "url": "https://kologojosias.com"
   },
   "version": "0.0.1",
-  "icon": "resources/logo.png",
+  "icon": "resources/icon.png",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -27,7 +27,7 @@
           "id": "emulators-android",
           "name": "Android Emulators",
           "contextualTitle": "Android Emulator",
-          "icon": "resources/icon.svg",
+          "icon": "resources/mobile-phone.svg",
           "visibility": "visible"
         }
       ]
@@ -37,7 +37,7 @@
         {
           "id": "emulator-live-preview",
           "title": "Emulators Live Preview",
-          "icon": "resources/icon.svg"
+          "icon": "resources/mobile-phone.svg"
         }
       ]
     },
