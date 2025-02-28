@@ -3,7 +3,7 @@
   "displayName": "Emulator Live Preview",
   "description": "A VS Code extension that provides real-time Android & iOS emulator streaming within the workspace, featuring customizable resolution, WebSocket controls, and interactive touch gestures. Unlike existing solutions, it offers seamless live preview without detaching from the workspace.",
   "publisher": "yoshimyra",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "author": {
     "name": "Yoshimyra",
     "email": "hello@kologojosias.com",
