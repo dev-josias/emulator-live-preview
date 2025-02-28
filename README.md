@@ -88,6 +88,6 @@ This extension contributes the following settings:
 For more details and troubleshooting, please refer to:
 
 - [VS Code Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-- [Issues and Feature Requests](https://github.com/dev-josias/emulator-live-preview/issues)
+- [Issues and Feature Requests](https://github.com/dev-josias/emulator-live-preview-issues/issues)
 
 **Enjoy a seamless mobile development experience directly from your editor!**
