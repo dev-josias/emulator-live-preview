@@ -1,6 +1,6 @@
 # Emulator Live Preview
 
-**Emulator Live Preview** is a Visual Studio Code extension that seamlessly docks Android and iOS emulators directly within your VS Code workspace. Enjoy real‑time screen streaming and interactive controls so you can develop, test, and debug your mobile applications without ever leaving the editor. Future updates will also support mirroring of physical devices.
+**Emulator Live Preview** is A VS Code extension that provides real-time Android & iOS emulator streaming within the workspace, featuring customizable resolution, WebSocket controls, and interactive touch gestures. Unlike existing solutions, it offers seamless live preview without detaching from the workspace.
 
 ## Features
 
