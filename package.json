@@ -24,9 +24,16 @@
     "views": {
       "emulator-live-preview": [
         {
-          "id": "emulators-android",
-          "name": "Android Emulators",
+          "id": "emulator-live-preview-android",
+          "name": "Emulators: Android",
           "contextualTitle": "Android Emulator",
+          "icon": "resources/mobile-phone.svg",
+          "visibility": "visible"
+        },
+        {
+          "id": "emulator-live-preview-ios",
+          "name": "Emulators: IOS",
+          "contextualTitle": "IOS Emulator",
           "icon": "resources/mobile-phone.svg",
           "visibility": "visible"
         }
@@ -43,12 +50,12 @@
     },
     "commands": [
       {
-        "command": "emulator-live-preview.start",
+        "command": "emulator-live-preview.launchEmulator",
         "title": "Start Emulator",
         "icon": "$(debug-start)"
       },
       {
-        "command": "emulator-live-preview.stop",
+        "command": "emulator-live-preview.stopEmulator",
         "title": "Stop Emulator",
         "icon": "$(debug-stop)"
       },
@@ -71,13 +78,13 @@
     "menus": {
       "view/item/context": [
         {
-          "command": "emulator-live-preview.start",
-          "when": "viewItem == emulatorStopped && view == emulators-android",
+          "command": "emulator-live-preview.launchEmulator",
+          "when": "viewItem == emulatorStopped",
           "group": "inline"
         },
         {
-          "command": "emulator-live-preview.stop",
-          "when": "viewItem == emulatorRunning && view == emulators-android",
+          "command": "emulator-live-preview.stopEmulator",
+          "when": "viewItem == emulatorRunning",
           "group": "inline"
         }
       ],
